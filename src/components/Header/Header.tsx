@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { initialValue } from "providers/user/AppContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsFillHouseDoorFill, BsFillPeopleFill } from "react-icons/bs";
 import NavBar from "@components/NavBar/NavBar";
 import { useMutation } from "@apollo/client";
@@ -191,6 +191,21 @@ export default function Header() {
         {showModal === "notifications" && (
           <Modal open={true} onOpenChange={() => setShowModal("")}>
             {<ModalNotifications setShowModal={setShowModal} />}
+          </Modal>
+        )}
+        {showModal === "settings" && (
+          <Modal open={isModalOpen} onOpenChange={() => setShowModal("")}>
+            {
+              <AppProvider>
+                <ModalSettings
+                  setIsModalOpen={setIsModalOpen}
+                  firstName={firstName}
+                  email={email}
+                  id={id}
+                  lastName={lastName}
+                />
+              </AppProvider>
+            }
           </Modal>
         )}
       </div>
