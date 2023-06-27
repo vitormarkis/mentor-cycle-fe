@@ -31,7 +31,7 @@ const DynamicThemedImage = dynamic(() => import("@components/Header/ThemeImage")
 export default function Header() {
   const { user, setUser } = useUser();
   const router = useRouter();
-  const [setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [toggleMenuProfile, setToggleMenuProfile] = useState(false);
   const [showModal, setShowModal] = useState<string>();
   const { openModal } = useModal();
@@ -78,6 +78,7 @@ export default function Header() {
     settings: () => {
       setShowModal("settings");
       setToggleMenuProfile(false);
+      setIsModalOpen(true);
     },
     logout: logOutUser(),
   };
@@ -195,17 +196,14 @@ export default function Header() {
         )}
         {showModal === "settings" && (
           <Modal open={isModalOpen} onOpenChange={() => setShowModal("")}>
-            {
-              <AppProvider>
-                <ModalSettings
-                  setIsModalOpen={setIsModalOpen}
-                  firstName={firstName}
-                  email={email}
-                  id={id}
-                  lastName={lastName}
-                />
-              </AppProvider>
-            }
+            <ModalSettings
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+              firstName={firstName}
+              email={email}
+              id={id}
+              lastName={lastName}
+            />
           </Modal>
         )}
       </div>
