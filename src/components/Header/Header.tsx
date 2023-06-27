@@ -19,6 +19,7 @@ import { useModal } from "contexts/ModalContext";
 import { logError } from "SIGNUP_SRC/helpers/logError";
 import Modal from "@components/Modal/Modal";
 import { useModal } from "contexts/ModalContext";
+import { logError } from "SIGNUP_SRC/helpers/logError";
 
 const linkStyle = "flex items-center justify-center";
 const itemsMenuStyle =
