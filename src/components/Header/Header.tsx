@@ -15,10 +15,9 @@ import dynamic from "next/dynamic";
 import { queriesIndex as api } from "services/apollo/queries/queries.index";
 import { useTypedQuery } from "@hooks/useTypedQuery";
 import { removeTypenameProperty } from "utils/removeTypename";
-import Modal from "@components/Modal/Modal";
 import { useModal } from "contexts/ModalContext";
 import { logError } from "SIGNUP_SRC/helpers/logError";
-import { AppProvider } from "contexts/AppContext";
+import Modal from "@components/Modal/Modal";
 
 const linkStyle = "flex items-center justify-center";
 const itemsMenuStyle =
@@ -31,7 +30,7 @@ const DynamicThemedImage = dynamic(() => import("@components/Header/ThemeImage")
 export default function Header() {
   const { user, setUser } = useUser();
   const router = useRouter();
-  const [setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [toggleMenuProfile, setToggleMenuProfile] = useState(false);
   const [showModal, setShowModal] = useState<string>();
   const { openModal } = useModal();
@@ -78,6 +77,7 @@ export default function Header() {
     settings: () => {
       setShowModal("settings");
       setToggleMenuProfile(false);
+      setIsModalOpen(true);
     },
     logout: logOutUser(),
   };
@@ -195,17 +195,14 @@ export default function Header() {
         )}
         {showModal === "settings" && (
           <Modal open={isModalOpen} onOpenChange={() => setShowModal("")}>
-            {
-              <AppProvider>
-                <ModalSettings
-                  setIsModalOpen={setIsModalOpen}
-                  firstName={firstName}
-                  email={email}
-                  id={id}
-                  lastName={lastName}
-                />
-              </AppProvider>
-            }
+            <ModalSettings
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+              firstName={firstName}
+              email={email}
+              id={id}
+              lastName={lastName}
+            />
           </Modal>
         )}
       </div>

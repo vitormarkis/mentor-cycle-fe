@@ -1,4 +1,3 @@
-import ModalSettings from "@components/Modal/ModalSettings";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 // Defina o tipo para o estado do ModalContext
@@ -19,9 +18,7 @@ type ModalContextType = ModalState & ModalActions;
 // Crie o contexto do ModalContext
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-export const ModalProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // Estado dos modais
   const [modalState, setModalState] = useState<ModalState>({
     editProfileModal: false,
@@ -49,12 +46,7 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({
     closeModal,
   };
 
-  return (
-    <ModalContext.Provider value={contextValue}>
-      {children}
-      <ModalSettings />
-    </ModalContext.Provider>
-  );
+  return <ModalContext.Provider value={contextValue}>{children}</ModalContext.Provider>;
 };
 
 // Hook personalizado para usar o ModalContext
