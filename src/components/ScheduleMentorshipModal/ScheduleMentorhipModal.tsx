@@ -16,6 +16,7 @@ import { useTypedQuery } from "@hooks/useTypedQuery";
 import { queriesIndex as api } from "services/apollo/queries/queries.index";
 import { TGET_AVAILABILITIES_queryDataSchema as TUserAvailability } from "services/apollo/queries/queries-properties";
 import { TStepButtons } from "@components/ScheduleMentorshipModal/ScheduleMentorhipModal.types";
+import { logError } from "SIGNUP_SRC/helpers/logError";
 
 export const ScheduleMentorshipModal = ({
   open,
@@ -87,8 +88,7 @@ export const ScheduleMentorshipModal = ({
     },
     skip: !mentor?.id,
   });
-  if (errorAvailabilitiesResponse?.error)
-    console.log("errorAvailabilitiesResponse", errorAvailabilitiesResponse);
+  logError({ errorAvailabilitiesResponse });
 
   const availabilities =
     availabilitiesResponse?.findMentorAvailability.availability ?? null;

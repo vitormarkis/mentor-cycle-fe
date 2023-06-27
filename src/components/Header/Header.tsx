@@ -17,6 +17,7 @@ import { useTypedQuery } from "@hooks/useTypedQuery";
 import { removeTypenameProperty } from "utils/removeTypename";
 import Modal from "@components/Modal/Modal";
 import { useModal } from "contexts/ModalContext";
+import { logError } from "SIGNUP_SRC/helpers/logError";
 
 const linkStyle = "flex items-center justify-center";
 const itemsMenuStyle =
@@ -48,7 +49,7 @@ export default function Header() {
       });
     },
   });
-  if (errorMe?.error) console.log("errorMe", errorMe);
+  logError({ errorMe });
 
   const [signOutUser] = useMutation(LOGOUT_USER);
 
