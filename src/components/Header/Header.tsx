@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { initialValue } from "providers/user/AppContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsFillHouseDoorFill, BsFillPeopleFill } from "react-icons/bs";
 import NavBar from "@components/NavBar/NavBar";
 import { useMutation } from "@apollo/client";
