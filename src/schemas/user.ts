@@ -1,7 +1,4 @@
-import {
-  availabilityAPISchema,
-  availabilitySchema,
-} from "schemas/availability";
+import { availabilityAPISchema, availabilitySchema } from "schemas/availability";
 import { z } from "zod";
 
 export const userSchema = z.object({
