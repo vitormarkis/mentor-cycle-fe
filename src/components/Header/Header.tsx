@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { initialValue } from "providers/user/AppContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsFillHouseDoorFill, BsFillPeopleFill } from "react-icons/bs";
 import NavBar from "@components/NavBar/NavBar";
 import { useMutation } from "@apollo/client";
@@ -31,7 +31,7 @@ const DynamicThemedImage = dynamic(() => import("@components/Header/ThemeImage")
 export default function Header() {
   const { user, setUser } = useUser();
   const router = useRouter();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [setIsModalOpen] = useState(false);
   const [toggleMenuProfile, setToggleMenuProfile] = useState(false);
   const [showModal, setShowModal] = useState<string>();
   const { openModal } = useModal();
@@ -78,7 +78,6 @@ export default function Header() {
     settings: () => {
       setShowModal("settings");
       setToggleMenuProfile(false);
-      setIsModalOpen(true);
     },
     logout: logOutUser(),
   };
@@ -192,18 +191,6 @@ export default function Header() {
         {showModal === "notifications" && (
           <Modal open={true} onOpenChange={() => setShowModal("")}>
             {<ModalNotifications setShowModal={setShowModal} />}
-          </Modal>
-        )}
-        {showModal === "settings" && (
-          <Modal open={isModalOpen} onOpenChange={() => setShowModal("")}>
-            <ModalSettings
-              isModalOpen={isModalOpen}
-              setIsModalOpen={setIsModalOpen}
-              firstName={firstName}
-              email={email}
-              id={id}
-              lastName={lastName}
-            />
           </Modal>
         )}
       </div>
